@@ -1,11 +1,11 @@
-@extends('login11')
+@extends('loginLayout')
 
 @section('content')
 
 <div class="row justify-content-center">
 	<div class="col-md-4">
 		<div class="card">
-		<div class="card-header" style="text-align:center">REGISTRATION</div>
+		<div class="card-header header-text">REGISTRATION</div>
 		<div class="card-body">
 			<form action="{{ route('sample.validate_registration') }}" method="POST">
 				@csrf
@@ -28,10 +28,17 @@
 					@endif
 				</div>
 				<div class="form-group mb-3">
-					<input type="password" name="confirmPassword" class="form-control" placeholder="confirm Password" value="{{old('confirmPassword')}}">
+					<input type="password" name="confirmPassword" class="form-control" placeholder="confirm Password" value="{{session('confirmPassword')}}">
 					@if($errors->has('confirmPassword'))
 						<span class="text-danger">{{ $errors->first('confirmPassword') }}</span>
 					@endif
+				</div>
+				<div class="form-group mb-3">
+					<select class="form-select" aria-label="Default select example" name="userRole">
+						@foreach ($UserRoles as $UserRole)
+  							<option value="{{ $UserRole['id'] }}">{{ $UserRole['user_type'] }}</option>
+  						@endforeach
+					</select>
 				</div>
 				<div class="d-grid mx-auto">
 					<button type="submit" class="btn btn-primary btn-block mb-4">Register</button>
