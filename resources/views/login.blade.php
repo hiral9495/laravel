@@ -8,6 +8,13 @@
 </div>
 
 @endif
+@if($message = Session::get('error'))
+
+<div class="alert alert-danger">
+    {{ $message }}
+</div>
+
+@endif
 
 <div class="row justify-content-center">
     <div class="col-md-4">
